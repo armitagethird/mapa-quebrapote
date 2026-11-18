@@ -5,17 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mapa do Bem-Viver do Quebra-Pote</title>
   <meta name="description" content="Serviços de saúde, educação e alimentação do bairro Quebra-Pote, zona rural de São Luís (MA).">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
     <h1>Mapa do Bem-Viver do Quebra-Pote</h1>
-    <p>Serviços do bairro num só lugar. Toque num lugar da lista para ver no mapa.</p>
+    <p>Serviços do bairro num só lugar. Toque em "Ver no mapa" para achar cada lugar.</p>
   </header>
 
   <main>
-    <div id="mapa" aria-label="Mapa do bairro Quebra-Pote"></div>
+    <p class="mostrando">Mostrando: <strong id="titulo-mapa">Bairro Quebra-Pote</strong></p>
+    <iframe id="mapa" title="Mapa do bairro Quebra-Pote" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
 
     <section class="lista">
       <h2>Lugares</h2>
@@ -36,7 +36,6 @@
     <p>Horários podem mudar. Na dúvida, confirme no local.</p>
   </footer>
 
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="pontos.js"></script>
   <script src="script.js"></script>
 </body>

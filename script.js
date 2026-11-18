@@ -1,81 +1,70 @@
-// Monta o mapa
-const mapa = L.map("mapa").setView(CENTRO_DO_MAPA, 15);
-
-L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-  maxZoom: 19,
-  attribution: "&copy; colaboradores do OpenStreetMap"
-}).addTo(mapa);
-
+const mapa = document.getElementById("mapa");
+const titulo = document.getElementById("titulo-mapa");
 const lista = document.getElementById("lugares");
 const filtros = document.getElementById("filtros");
-const marcadores = [];
 
-function textoPopup(ponto) {
-  let html = `<strong>${ponto.nome}</strong><br>`;
-  html += `<em>${ponto.tipo}</em><br>`;
-  if (ponto.endereco) html += `📍 ${ponto.endereco}<br>`;
-  if (ponto.horario) html += `🕒 ${ponto.horario}<br>`;
-  if (ponto.servicos) html += `${ponto.servicos}<br>`;
-  html += `<a href="https://www.google.com/maps/dir/?api=1&destination=${ponto.lat},${ponto.lng}" target="_blank" rel="noopener">Como chegar</a>`;
-  if (ponto.aproximado) html += `<br><small>Localização aproximada</small>`;
-  return html;
+// Mostra um ponto no Google Maps embutido (não precisa de chave de API)
+function mostrarNoMapa(lat, lng, zoom, nome) {
+  mapa.src =
+    "https://maps.google.com/maps?q=" +
+    lat + "," + lng +
+    "&z=" + zoom + "&output=embed";
+  titulo.textContent = nome;
 }
 
-// Cria um marcador e um item de lista para cada lugar
-PONTOS.forEach((ponto) => {
-  const marcador = L.marker([ponto.lat, ponto.lng])
-    .addTo(mapa)
-    .bindPopup(textoPopup(ponto));
+function linkComoChegar(lat, lng) {
+  return "https://www.google.com/maps/dir/?api=1&destination=" + lat + "," + lng;
+}
 
+mostrarNoMapa(CENTRO_DO_MAPA.lat, CENTRO_DO_MAPA.lng, CENTRO_DO_MAPA.zoom, "Bairro Quebra-Pote");
+
+// Cria um item na lista para cada lugar
+const itens = PONTOS.map((ponto) => {
   const item = document.createElement("li");
   item.tabIndex = 0;
-  item.dataset.tipo = ponto.tipo;
   item.innerHTML = `
     <span class="tipo">${ponto.tipo}</span>
     <div class="nome">${ponto.nome}</div>
     ${ponto.endereco ? `<p class="detalhe">📍 ${ponto.endereco}</p>` : ""}
     ${ponto.horario ? `<p class="detalhe">🕒 ${ponto.horario}</p>` : ""}
+    ${ponto.telefone ? `<p class="detalhe">📞 ${ponto.telefone}</p>` : ""}
     ${ponto.servicos ? `<p class="detalhe">${ponto.servicos}</p>` : ""}
-    ${ponto.aproximado ? `<p class="aviso">Localização aproximada</p>` : ""}
+    <div class="acoes">
+      <button type="button" class="ver">Ver no mapa</button>
+      <a class="chegar" href="${linkComoChegar(ponto.lat, ponto.lng)}" target="_blank" rel="noopener">Como chegar</a>
+    </div>
   `;
 
   const abrir = () => {
-    mapa.flyTo([ponto.lat, ponto.lng], 17);
-    marcador.openPopup();
-    document.getElementById("mapa").scrollIntoView({ behavior: "smooth" });
+    mostrarNoMapa(ponto.lat, ponto.lng, 18, ponto.nome);
+    lista.querySelectorAll("li").forEach((li) => li.classList.remove("selecionado"));
+    item.classList.add("selecionado");
+    mapa.scrollIntoView({ behavior: "smooth", block: "center" });
   };
-  item.addEventListener("click", abrir);
+
+  item.querySelector(".ver").addEventListener("click", abrir);
   item.addEventListener("keydown", (e) => {
     if (e.key === "Enter") abrir();
   });
 
   lista.appendChild(item);
-  marcadores.push({ ponto, marcador, item });
+  return { ponto, item };
 });
-
-// Ajusta o zoom para mostrar todos os lugares
-if (PONTOS.length > 1) {
-  const grupo = L.featureGroup(marcadores.map((m) => m.marcador));
-  mapa.fitBounds(grupo.getBounds().pad(0.3));
-}
 
 // Botões de filtro por tipo
 const tipos = ["Todos", ...new Set(PONTOS.map((p) => p.tipo))];
 
 tipos.forEach((tipo) => {
   const botao = document.createElement("button");
+  botao.type = "button";
   botao.textContent = tipo;
   if (tipo === "Todos") botao.classList.add("ativo");
 
   botao.addEventListener("click", () => {
     filtros.querySelectorAll("button").forEach((b) => b.classList.remove("ativo"));
     botao.classList.add("ativo");
-
-    marcadores.forEach(({ ponto, marcador, item }) => {
-      const mostrar = tipo === "Todos" || ponto.tipo === tipo;
-      item.style.display = mostrar ? "" : "none";
-      if (mostrar) marcador.addTo(mapa);
-      else mapa.removeLayer(marcador);
+    itens.forEach(({ ponto, item }) => {
+      item.style.display = tipo === "Todos" || ponto.tipo === tipo ? "" : "none";
     });
   });
 

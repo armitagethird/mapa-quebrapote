@@ -33,11 +33,51 @@ main {
   padding: 16px;
 }
 
+.mostrando {
+  margin: 0 0 8px;
+}
+
 #mapa {
+  display: block;
+  width: 100%;
   height: 60vh;
   min-height: 320px;
   border-radius: 12px;
   border: 2px solid #d6ddd2;
+}
+
+.acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.acoes .ver,
+.acoes .chegar {
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 10px 16px;
+  border-radius: 10px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.acoes .ver {
+  border: none;
+  background: #2f6b4f;
+  color: #fff;
+}
+
+.acoes .chegar {
+  border: 2px solid #2f6b4f;
+  color: #2f6b4f;
+  background: #fff;
+}
+
+#lugares li.selecionado {
+  border-color: #2f6b4f;
+  background: #f0f7f2;
 }
 
 h2 {
@@ -80,7 +120,6 @@ h2 {
   border: 2px solid #d6ddd2;
   border-radius: 12px;
   padding: 14px 16px;
-  cursor: pointer;
 }
 
 #lugares li:hover,
@@ -144,8 +183,4 @@ footer {
 
 footer p {
   margin: 4px 0;
-}
-
-.leaflet-popup-content {
-  font-size: 16px;
 }

@@ -1,35 +1,53 @@
 // LUGARES DO MAPA
-// Para adicionar ou corrigir um lugar, edite esta lista.
+// Para adicionar um lugar, copie um bloco { ... } e preencha.
 //
-// Como pegar as coordenadas certas:
-// 1. Abra o Google Maps e ache o lugar.
-// 2. Clique com o botão direito em cima dele (no celular, segure o dedo).
-// 3. Clique nos números que aparecem (ex.: -2.6833, -44.2167). Eles são copiados.
-// 4. Cole em lat e lng abaixo e mude "aproximado" para false.
-//
-// ATENÇÃO: as coordenadas abaixo são APROXIMADAS. Confira cada uma antes de publicar.
+// lat e lng são as coordenadas do lugar. Para pegar:
+// 1. Abra o lugar no Google Maps.
+// 2. Clique com o botão direito em cima do pino (no celular, segure o dedo).
+// 3. Clique nos números que aparecem (ex.: -2.6923, -44.2156). Eles são copiados.
+// 4. O primeiro número é lat, o segundo é lng.
 
-const CENTRO_DO_MAPA = [-2.6833, -44.2167];
+const CENTRO_DO_MAPA = { lat: -2.6975, lng: -44.2240, zoom: 15 };
 
 const PONTOS = [
   {
-    nome: "Escola Casa Familiar Rural",
-    tipo: "Escola",
-    endereco: "Estrada do Quebra-Pote, 1000",
-    horario: "Segunda a sexta (confirmar horário)",
-    servicos: "Escola municipal com formação voltada para a zona rural",
-    lat: -2.6800,
-    lng: -44.2150,
-    aproximado: true
+    nome: "Centro de Saúde Quebra Pote",
+    tipo: "Saúde",
+    endereco: "Praça do Cemitério, s/n – Quebra Pote",
+    horario: "Segunda a sexta, 7h às 18h · Sábado, 7h às 13h",
+    telefone: "",
+    servicos: "Consultas, pré-natal, enfermagem e preventivo, teleconsultas com especialistas, coleta de exames, ultrassom, odontologia, vacinação, curativos e farmácia básica",
+    lat: -2.6923504,
+    lng: -44.2156105
   },
   {
-    nome: "Posto de Saúde do Quebra-Pote",
-    tipo: "Saúde",
-    endereco: "Confirmar endereço",
-    horario: "Segunda a sexta, 7h às 17h (confirmar)",
-    servicos: "Atendimento básico de saúde (confirmar serviços: consultas, vacinação etc.)",
-    lat: -2.6850,
-    lng: -44.2180,
-    aproximado: true
+    nome: "UEB Prof. Rosilda Cordeiro",
+    tipo: "Escola",
+    endereco: "Rua do Passeio, 100 – Quebra Pote",
+    horario: "",
+    telefone: "",
+    servicos: "Escola municipal de ensino fundamental, com quadra coberta e entrada acessível",
+    lat: -2.696444,
+    lng: -44.2178212
+  },
+  {
+    nome: "UEB Meus Amiguinhos",
+    tipo: "Escola",
+    endereco: "Praça da Igreja, 100 – Quebra Pote",
+    horario: "",
+    telefone: "(98) 98179-3467 / (98) 3241-2104",
+    servicos: "Escola municipal",
+    lat: -2.698047,
+    lng: -44.22342
+  },
+  {
+    nome: "Escola Casa Familiar Rural (CFR Quebra-Pote)",
+    tipo: "Escola",
+    endereco: "Estrada do Quebra-Pote, 1000 – Vila Maranhão",
+    horario: "",
+    telefone: "",
+    servicos: "Ensino com pedagogia da alternância, área de plantação para atividades práticas e quadra poliesportiva",
+    lat: -2.7036459,
+    lng: -44.2397109
   }
 ];
