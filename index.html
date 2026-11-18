@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mapa do Bem-Viver do Quebra-Pote</title>
+  <meta name="description" content="Serviços de saúde, educação e alimentação do bairro Quebra-Pote, zona rural de São Luís (MA).">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Mapa do Bem-Viver do Quebra-Pote</h1>
+    <p>Serviços do bairro num só lugar. Toque num lugar da lista para ver no mapa.</p>
+  </header>
+
+  <main>
+    <div id="mapa" aria-label="Mapa do bairro Quebra-Pote"></div>
+
+    <section class="lista">
+      <h2>Lugares</h2>
+      <div class="filtros" id="filtros"></div>
+      <ul id="lugares"></ul>
+    </section>
+
+    <section class="compartilhar">
+      <h2>Compartilhe</h2>
+      <p>Mande o mapa para parentes e vizinhos.</p>
+      <a id="whatsapp" class="botao" target="_blank" rel="noopener">Enviar no WhatsApp</a>
+      <img id="qrcode" alt="QR code para abrir este mapa">
+    </section>
+  </main>
+
+  <footer>
+    <p>Projeto de extensão "Viver Bem de Verdade: Saúde, Comida e Sociedade" · Romero Santos Saraiva · ADS</p>
+    <p>Horários podem mudar. Na dúvida, confirme no local.</p>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="pontos.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
